@@ -2,56 +2,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>艾尔梅德战记 Another</title>
-<style>
+<title>艾尔梅德战记 Another</title><style>
 body {
   margin:0;
   font-family: Arial, sans-serif;
-  background:#000000;
+  background:#000;
   color:#fff;
-}header { text-align:center; padding:30px 15px; }
+  overflow-x:hidden;
+}
 
-.title-wrap{ display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; }
+#stars{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-2;
+  pointer-events:none;
+}
 
-.title { font-size:42px; font-weight:bold; background: linear-gradient(90deg, #a78bfa, #c4b5fd); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+#particles{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  pointer-events:none;
+}
 
-.vine { font-size:26px; color:#a78bfa; }
+header {
+  text-align:center;
+  padding:30px 15px;
+}
 
-.sword { font-size:26px; margin:0 6px; }
+.title-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
 
-.subtitle { font-size:22px; background: linear-gradient(90deg, #7dd3fc, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.title {
+  font-size:42px;
+  font-weight:bold;
+  background: linear-gradient(90deg, #a78bfa, #c4b5fd);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation: glow 2.5s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(167,139,250,0.6);
+}
 
-.author { width:100%; margin-top:6px; background: linear-gradient(90deg, #facc15, #fbbf24, #fde68a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:bold; }
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 2px #a78bfa); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 14px #c4b5fd); transform: scale(1.03); }
+  100% { filter: drop-shadow(0 0 2px #a78bfa); transform: scale(1); }
+}
 
-.slideshow { width:100%; height:320px; position:relative; overflow:hidden; }
+.subtitle {
+  font-size:20px;
+  background:linear-gradient(90deg,#7dd3fc,#a78bfa);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-.slide { position:absolute; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
+.author {
+  margin-top:6px;
+  font-size:14px;
+  background:linear-gradient(90deg,#facc15,#fbbf24,#fde68a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-.slide.active { opacity:1; }
+.slideshow{
+  width:100%;
+  height:340px;
+  position:relative;
+  overflow:hidden;
+}
 
-.section { text-align:center; padding:25px 15px; max-width:900px; margin:auto; }
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1s;
+}
 
-.section h2 { color:#c4b5fd; margin-bottom:10px; }
+.slide.active{opacity:1;}
 
-.button { background:#2563eb; padding:12px 24px; border-radius:8px; color:white; text-decoration:none; display:inline-block; }
+.section{
+  text-align:center;
+  padding:30px 15px;
+  max-width:900px;
+  margin:auto;
+}
 
-.desc { white-space:pre-line; line-height:1.8; color:#cbd5e1; font-size:14px; }
+h2{color:#c4b5fd;margin-bottom:12px;}
 
-.video { width:100%; max-width:800px; height:450px; margin:20px auto; }
+.desc{
+  white-space:pre-line;
+  line-height:1.8;
+  color:#cbd5e1;
+  font-size:14px;
+}
 
-footer { text-align:center; padding:20px; font-size:14px; color:#aaa; }
+.video{
+  width:100%;
+  max-width:820px;
+  height:460px;
+  margin:10px auto;
+}
 
-@media (max-width:600px){ .title{font-size:30px;} .slideshow{height:260px;} .video{height:220px;} } </style>
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:10px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+  width:220px;
+  background:#2563eb;
+}
 
-</head>
-<body><header>
+footer{
+  text-align:center;
+  padding:20px;
+  color:#888;
+  font-size:12px;
+}
+
+@media(max-width:600px){
+  .slideshow{height:240px;}
+  .video{height:220px;}
+}
+</style></head><body><canvas id="stars"></canvas> <canvas id="particles"></canvas>
+
+<header>
   <div class="title-wrap">
-    <div class="title">
-      艾尔梅德战记
-      <span class="sword">⚔</span>
-      <span class="subtitle">Another</span>
-    </div>
-    <div class="author">By Chesela</div>
+    <div class="title">艾尔梅德战记 ⚔ Another</div>
+    <div class="author">类火纹Srpg作品 By Chesela</div>
   </div>
 </header><div class="slideshow">
   <img class="slide active" src="images/1.jpg">
@@ -60,41 +152,38 @@ footer { text-align:center; padding:20px; font-size:14px; color:#aaa; }
   <img class="slide" src="images/4.jpg">
   <img class="slide" src="images/5.jpg">
   <img class="slide" src="images/6.jpg">
-</div><!-- PV播放 --><div class="section">
-  <h2>[PV宣传视频]</h2>
-  <iframe class="video" 
-    src="https://player.bilibili.com/player.html?bvid=BV1SHKczUE8Y&autoplay=0" 
-    scrolling="no" 
-    border="0" 
-    frameborder="no" 
-    framespacing="0" 
-    allowfullscreen="true">
-  </iframe>
 </div><div class="section">
-  <h2>[简介]</h2>
+  <h2>PV宣传视频</h2>
+  <iframe class="video" src="https://player.bilibili.com/player.html?bvid=BV1SHKczUE8Y&autoplay=0" frameborder="0" allowfullscreen></iframe>
+</div><div class="section">
+  <h2>简介</h2>
   <p class="desc">
-故事发生在里多尼亚大陆，以巴尔扎斯帝国与索兰德王国之间发生的战争为开篇，主角艾尔梅德是王国边境领地的领主继承人，在支援王国的旅途及不断的战斗中，步步揭露大陆隐藏的秘密与教国的黑暗一面！
-————————————————————
+故事发生在里多尼亚大陆这片大地，
+以巴尔扎斯帝国与索兰德王国之间的战争为开篇。
+主角艾尔梅德等人在战火中逐步揭开大陆真相。
   </p>
 </div><div class="section">
-  <h2>[系统介绍]</h2>
+  <h2>系统特色</h2>
   <p class="desc">
-结合了FE系列中 Engage的打破·苍炎的间章据点·776的俘虏捕获，以及大量的原创技能与特色系统
-————————————————————
+FEengage打破系统 / 类FE苍炎晓女据点间章 
+/ 776俘虏捕获系统 / 大量原创系统和技能
   </p>
 </div><div class="section">
-  <a class="button" href="https://github.com/Chesela0728/ALFEM.WEB/releases/download/FEGame/Another.R1.5.9.zip" target="_blank">
-    立刻下载游玩
-  </a>
-</div><footer>
-  <p>同人游戏作品，仅供学习交流</p>
-</footer><script>
-let slides = document.querySelectorAll('.slide');
-let index = 0;
-setInterval(() => {
-  slides[index].classList.remove('active');
-  index = Math.floor(Math.random() * slides.length);
-  slides[index].classList.add('active');
-}, 3000);
+  <a class="btn" href="https://github.com/Chesela0728/ALFEM.WEB/releases/download/FEGame/Another.R1.5.9.zip">立刻下载游玩</a>
+</div><footer>同人游戏作品，仅供学习交流</footer><script>
+// 星空
+const c=document.getElementById("stars");const x=c.getContext("2d");
+function rs(){c.width=innerWidth;c.height=innerHeight}rs();onresize=rs;
+let s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.5,v:Math.random()*0.5+0.2});
+function a(){x.clearRect(0,0,c.width,c.height);x.fillStyle="#fff";for(let p of s){x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.fill();p.y+=p.v;if(p.y>c.height){p.y=0;p.x=Math.random()*c.width}}requestAnimationFrame(a)}a();
+
+// ✨ 粒子（标题呼吸增强）
+const pc=document.getElementById("particles");const px=pc.getContext("2d");pc.width=innerWidth;pc.height=innerHeight;
+let ps=[];for(let i=0;i<80;i++)ps.push({x:innerWidth/2+(Math.random()*200-100),y:100+Math.random()*80,r:Math.random()*2,v:Math.random()*1-0.5});
+function pa(){px.clearRect(0,0,pc.width,pc.height);px.fillStyle="rgba(180,160,255,0.8)";for(let p of ps){px.beginPath();px.arc(p.x,p.y,p.r,0,6.28);px.fill();p.x+=p.v;if(p.x<0)p.x=innerWidth;if(p.x>innerWidth)p.x=0;}requestAnimationFrame(pa)}pa();
+
+// 轮播
+let slides=document.querySelectorAll('.slide');let i=0;
+setInterval(()=>{slides[i].classList.remove('active');i=Math.floor(Math.random()*slides.length);slides[i].classList.add('active');},3000);
 </script></body>
 </html>
