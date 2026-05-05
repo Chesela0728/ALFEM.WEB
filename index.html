@@ -9,31 +9,48 @@ body {
   font-family: Arial, sans-serif;
   background:#0b0f1a;
   color:#fff;
-}header { text-align:center; padding:40px 20px; }
+}header { text-align:center; padding:30px 15px; }
 
-.title { font-size:42px; font-weight:bold; }
+.title-wrap{ display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; }
 
-.subtitle { font-size:24px; margin-left:10px; background: linear-gradient(90deg, #7dd3fc, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display:inline-block; }
+.title { font-size:42px; font-weight:bold; background: linear-gradient(90deg, #a78bfa, #c4b5fd); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 
-.slideshow { width:100%; height:420px; position:relative; overflow:hidden; }
+.vine { font-size:26px; color:#a78bfa; }
+
+.sword { font-size:26px; margin:0 6px; }
+
+.subtitle { font-size:22px; background: linear-gradient(90deg, #7dd3fc, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.slideshow { width:100%; height:260px; position:relative; overflow:hidden; }
 
 .slide { position:absolute; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
 
 .slide.active { opacity:1; }
 
-.section { text-align:center; padding:40px 20px; max-width:900px; margin:auto; }
+.section { text-align:center; padding:25px 15px; max-width:900px; margin:auto; }
+
+.section h2 { color:#c4b5fd; margin-bottom:10px; }
 
 .button { background:#2563eb; padding:12px 24px; border-radius:8px; color:white; text-decoration:none; display:inline-block; }
 
-.desc { white-space:pre-line; line-height:1.8; color:#cbd5e1; }
+.desc { white-space:pre-line; line-height:1.8; color:#cbd5e1; font-size:14px; }
 
-footer { text-align:center; padding:20px; font-size:14px; color:#aaa; } </style>
+.author { background: linear-gradient(90deg, #facc15, #fbbf24, #fde68a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:bold; }
+
+footer { text-align:center; padding:20px; font-size:14px; color:#aaa; }
+
+@media (max-width:600px){ .title{font-size:30px;} .slideshow{height:200px;} } </style>
 
 </head>
 <body><header>
-  <div class="title">
-    艾尔梅德战记
-    <span class="subtitle">Another</span>
+  <div class="title-wrap">
+    <span class="vine">🌿</span>
+    <div class="title">
+      艾尔梅德战记
+      <span class="sword">⚔</span>
+      <span class="subtitle">Another</span>
+    </div>
+    <span class="vine">🌿</span>
   </div>
 </header><div class="slideshow">
   <img class="slide active" src="images/1.jpg">
@@ -43,22 +60,29 @@ footer { text-align:center; padding:20px; font-size:14px; color:#aaa; } </style>
   <img class="slide" src="images/5.jpg">
   <img class="slide" src="images/6.jpg">
 </div><div class="section">
-  <h2>By Chesela</h2>
+  <h2>[游戏内截图一览]</h2>
+</div><div class="section">
+  <h2>[简介]</h2>
   <p class="desc">
-[简介]故事发生在里多尼亚大陆，以巴尔扎斯帝国与索兰德王国之间发生的战争为开篇，主角艾尔梅德是王国边境领地的领主继承人，在支援王国的旅途及不断的战斗中，步步揭露大陆隐藏的秘密与教国的黑暗一面！
+故事发生在里多尼亚大陆，以巴尔扎斯帝国与索兰德王国之间发生的战争为开篇，主角艾尔梅德是王国边境领地的领主继承人，在支援王国的旅途及不断的战斗中，步步揭露大陆隐藏的秘密与教国的黑暗一面！
 ————————————————————
-[系统特色]FEEngage的打破系统·FE苍炎的间章据点·FE776的俘虏捕获系统
   </p>
-  <br>
+</div><div class="section">
+  <h2>[系统介绍]</h2>
+  <p class="desc">
+FE Engage的打破系统 · FE 苍炎的间章据点 · FE 776的俘虏捕获系统
+  </p>
+</div><div class="section">
+  <h2 class="author">By Chesela</h2>
+</div><div class="section">
   <a class="button" href="https://drive.google.com/uc?export=download&confirm=t&id=1l-n3wMhMr92udTKCAABsZyJj1ZslEROh" target="_blank">
-    立刻下载
+    立刻下载游玩
   </a>
 </div><footer>
   <p>同人游戏作品，仅供学习交流</p>
 </footer><script>
 let slides = document.querySelectorAll('.slide');
 let index = 0;
-
 setInterval(() => {
   slides[index].classList.remove('active');
   index = Math.floor(Math.random() * slides.length);
