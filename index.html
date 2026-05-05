@@ -13,17 +13,19 @@ body {
 
 .title { font-size:42px; font-weight:bold; }
 
-.subtitle { font-size:26px; background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display:inline-block; margin-left:10px; }
+.subtitle { font-size:24px; margin-left:10px; background: linear-gradient(90deg, #7dd3fc, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display:inline-block; }
 
-.slideshow { width:100%; height:400px; position:relative; overflow:hidden; }
+.slideshow { width:100%; height:420px; position:relative; overflow:hidden; }
 
 .slide { position:absolute; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s; }
 
 .slide.active { opacity:1; }
 
-.section { text-align:center; padding:40px 20px; }
+.section { text-align:center; padding:40px 20px; max-width:900px; margin:auto; }
 
 .button { background:#2563eb; padding:12px 24px; border-radius:8px; color:white; text-decoration:none; display:inline-block; }
+
+.desc { white-space:pre-line; line-height:1.8; color:#cbd5e1; }
 
 footer { text-align:center; padding:20px; font-size:14px; color:#aaa; } </style>
 
@@ -37,15 +39,22 @@ footer { text-align:center; padding:20px; font-size:14px; color:#aaa; } </style>
   <img class="slide active" src="images/1.jpg">
   <img class="slide" src="images/2.jpg">
   <img class="slide" src="images/3.jpg">
+  <img class="slide" src="images/4.jpg">
+  <img class="slide" src="images/5.jpg">
+  <img class="slide" src="images/6.jpg">
 </div><div class="section">
-  <h2>策略战棋 · 战争史诗</h2>
-  <p>在战火与命运交织的世界中，做出你的选择。</p>
+  <h2>By Chesela</h2>
+  <p class="desc">
+[简介]故事发生在里多尼亚大陆，以巴尔扎斯帝国与索兰德王国之间发生的战争为开篇，主角艾尔梅德是王国边境领地的领主继承人，在支援王国的旅途及不断的战斗中，步步揭露大陆隐藏的秘密与教国的黑暗一面！
+————————————————————
+[系统特色]FEEngage的打破系统·FE苍炎的间章据点·FE776的俘虏捕获系统
+  </p>
   <br>
-  <a class="button" href="https://drive.google.com/uc?export=download&id=1l-n3wMhMr92udTKCAABsZyJj1ZslEROh" target="_blank">
-    下载游戏
+  <a class="button" href="https://drive.google.com/uc?export=download&confirm=t&id=1l-n3wMhMr92udTKCAABsZyJj1ZslEROh" target="_blank">
+    立刻下载
   </a>
 </div><footer>
-  <p>同人作品，仅供学习交流</p>
+  <p>同人游戏作品，仅供学习交流</p>
 </footer><script>
 let slides = document.querySelectorAll('.slide');
 let index = 0;
