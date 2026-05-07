@@ -45,7 +45,6 @@ header { text-align:center; padding:30px 15px; }
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   animation: glow 2.5s ease-in-out infinite;
-  text-shadow: 0 0 10px rgba(167,139,250,0.6);
 }
 
 .title .sub {
@@ -130,6 +129,7 @@ footer{
   padding:20px;
   color:#888;
   font-size:12px;
+  background:#111;
 }
 
 /* lightbox */
@@ -169,6 +169,14 @@ footer{
   color:#a78bfa;
 }
 
+/* 统计小字 */
+#stats{
+  display:block;
+  margin-top:6px;
+  font-size:11px;
+  color:#666;
+}
+
 @media(max-width:600px){
   .slideshow{height:320px;}
   .video{height:220px;}
@@ -206,9 +214,24 @@ footer{
 <div class="section">
   <h2>简介</h2>
   <p class="desc">
-故事发生在里多尼亚大陆这片大地，
-以巴尔扎斯帝国与索兰德王国之间的战争为开篇。
-主角艾尔梅德等人在战火中逐步揭开大陆真相。
+自从女神创世以来，里多尼亚大陆上经历了多次战乱，
+最后落得今天的局势，索兰德王国与巴尔扎斯帝国紧邻着
+立于东南端。北方则是维吉利亚联邦国与奉教国家弥亚拉特。
+西边则有叫佩尔隆的小岛国，专门培养佣兵与暗杀者这样的存在。
+索兰德王国的人们一向安居乐业，历代国王注重经济发展，
+爱好和平。且从未主动发动过战争，这样的索兰德被称为丰耲之国。
+却在百年前屡屡遭帝国侵略。
+巴尔扎斯帝国因其高地势与极端天气的困扰，锻造了子民钢铁般的
+意志与强大的军事力量。只要是有能力的人，都会被编入军队。
+帝国一直暗藏着扩展版图的野心。这也导致王国一直提防着帝国的动向。
+究竟是从什么时候开始，战争之气愈发膨胀呢。
+故事要从索兰德王国，迪邦特......
+一片由边境爵雷欧斯治理的边境领地开始说起。
+
+以巴尔扎斯帝国与索兰德王国之间的冲突为开篇。
+身为主人公的王国边境领地继承人艾尔梅德及其伙伴们
+在宿命的指引下聚集，随着战火不断的深入……
+逐步揭开大陆的真相，这是一个讲述勇气与羁绊的星之传承物语。
   </p>
 </div>
 
@@ -221,10 +244,16 @@ FEengage打破系统 / 类FE苍炎晓女据点间章
 </div>
 
 <div class="section">
-  <a class="btn" href="https://github.com/Chesela0728/ALFEM.WEB/releases/download/FEGame/Another.R1.5.9.zip">立刻下载游玩</a>
+  <a class="btn" id="downloadBtn"
+  href="https://github.com/Chesela0728/ALFEM.WEB/releases/download/FEGame/Another.R1.5.9.zip">
+  立刻下载游玩
+  </a>
 </div>
 
-<footer>同人游戏作品，仅供学习交流</footer>
+<footer>
+  非商业同人游戏作品，仅供学习交流
+  <span id="stats"></span>
+</footer>
 <footer>Chesela©️2024-2026</footer>
 <!-- lightbox -->
 <div id="lightbox">
@@ -234,7 +263,31 @@ FEengage打破系统 / 类FE苍炎晓女据点间章
 </div>
 
 <script>
-// 星空
+// ====== 统计系统 ======
+let data = JSON.parse(localStorage.getItem("gameStats") || "{}");
+
+if(!data.views) data.views = 0;
+if(!data.downloads) data.downloads = 0;
+
+// 访问 +1
+data.views++;
+localStorage.setItem("gameStats", JSON.stringify(data));
+
+function renderStats(){
+  document.getElementById("stats").innerText =
+    `｜总访问：${data.views} ｜ 下载量：${data.downloads}`;
+}
+renderStats();
+
+// 下载 +1
+document.getElementById("downloadBtn").onclick = function(){
+  data.downloads++;
+  localStorage.setItem("gameStats", JSON.stringify(data));
+  renderStats();
+};
+
+
+// ====== 星空 ======
 const c=document.getElementById("stars");
 const x=c.getContext("2d");
 function rs(){c.width=innerWidth;c.height=innerHeight}
@@ -261,11 +314,86 @@ function a(){
 }
 a();
 
-// 粒子
+// ====== 粒子 ======
 const pc=document.getElementById("particles");
 const px=pc.getContext("2d");
 pc.width=innerWidth;
 pc.height=innerHeight;
 
 let ps=[];
-for(let
+for(let i=0;i<80;i++)
+ps.push({x:innerWidth/2+(Math.random()*200-100),y:100+Math.random()*80,r:Math.random()*2,v:Math.random()*1-0.5});
+
+function pa(){
+  px.clearRect(0,0,pc.width,pc.height);
+  px.fillStyle="rgba(180,160,255,0.8)";
+  for(let p of ps){
+    px.beginPath();
+    px.arc(p.x,p.y,p.r,0,6.28);
+    px.fill();
+    p.x+=p.v;
+    if(p.x<0)p.x=innerWidth;
+    if(p.x>innerWidth)p.x=0;
+  }
+  requestAnimationFrame(pa);
+}
+pa();
+
+
+// ====== slideshow ======
+let slides=document.querySelectorAll('.slide');
+let i=0;
+
+setInterval(()=>{
+  slides[i].classList.remove('active');
+  i=Math.floor(Math.random()*slides.length);
+  slides[i].classList.add('active');
+},3000);
+
+
+// ====== lightbox ======
+const lightbox=document.getElementById('lightbox');
+const img=document.getElementById('lightbox-img');
+
+function show(index){
+  i=index;
+  img.src=slides[i].src;
+  lightbox.style.display='flex';
+}
+
+slides.forEach((s,index)=>{
+  s.onclick=(e)=>{
+    e.stopPropagation();
+    show(index);
+  }
+});
+
+function prev(){
+  i=(i-1+slides.length)%slides.length;
+  img.src=slides[i].src;
+}
+
+function next(){
+  i=(i+1)%slides.length;
+  img.src=slides[i].src;
+}
+
+document.getElementById('prev').onclick=(e)=>{e.stopPropagation();prev();}
+document.getElementById('next').onclick=(e)=>{e.stopPropagation();next();}
+
+document.addEventListener('keydown',(e)=>{
+  if(lightbox.style.display!=='flex')return;
+  if(e.key==='ArrowLeft')prev();
+  if(e.key==='ArrowRight')next();
+  if(e.key==='Escape')lightbox.style.display='none';
+});
+
+lightbox.onclick=(e)=>{
+  if(e.target===lightbox){
+    lightbox.style.display='none';
+  }
+};
+</script>
+
+</body>
+</html>
